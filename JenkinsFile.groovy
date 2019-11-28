@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'centos' }
+    }
     stages {
         stage('Example') {
             steps {
@@ -7,9 +9,9 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('Docker run') {
             steps {
-                sh 'sudo docker run -it -d centos -name rainbowTest_2 /bin/bash'
+                sh 'docker run -i -t -name centos7_test /bin/bash'
             }
         }
 
@@ -18,7 +20,6 @@ pipeline {
                 sh 'cat /etc/*-release'
             }
         }
-
     }
     //마지막 어떻게 할껀지
     post {
