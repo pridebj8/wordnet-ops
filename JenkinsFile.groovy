@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        docker { image 'centos' }
-    }
+    agent any
     stages {
         stage('Example') {
             steps {
@@ -20,7 +18,7 @@ pipeline {
                 sh 'cat /etc/*-release'
             }
         }
-        
+
     }
     //마지막 어떻게 할껀지
     post {
