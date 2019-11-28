@@ -1,9 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'centos' }
+    }
     stages {
         stage('Example') {
             steps {
                 echo 'Hello World7'
+            }
+        }
+        stage('Version Check') {
+            steps {
+                sh 'cat /etc/*-release'
             }
         }
     }
