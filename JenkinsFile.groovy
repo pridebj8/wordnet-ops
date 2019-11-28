@@ -8,11 +8,19 @@ pipeline {
                 echo 'Hello World7'
             }
         }
+
+        stage('test') {
+            steps {
+                sh 'sudo docker run -it -d centos -name rainbowTest_2 /bin/bash'
+            }
+        }
+
         stage('Version Check') {
             steps {
                 sh 'cat /etc/*-release'
             }
         }
+        
     }
     //마지막 어떻게 할껀지
     post {
