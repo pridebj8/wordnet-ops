@@ -14,10 +14,10 @@ pipeline {
             }
         }
         stage('Build docker ps') {
-            agent { dockerfile true }
+            agent any
             steps {
-                sh 'docker build -tag gradleT1 ./'
-                sh 'docker run -it -d gradleT1'
+                sh 'docker build -t wordnet-ops-01 ./'
+                sh 'docker run -p 49000:49000 -d  wordnet-ops-01'
             }
         }
     }
