@@ -1,23 +1,23 @@
 pipeline {
-    agent {
-        docker { image 'centos' }
+    environment {
+        registry = "mamohr/centos-java"
+        registryCredential = 'docker'
     }
+    agent none
     stages {
-        stage('Example') {
+        stage('Build') {
+            agent any
             steps {
-                echo 'Hello World7'
+                echo "Build~"
+                sh 'chmod +x ./gradlew'
+                sh('./gradlew build')
             }
         }
-
-        stage('Docker run') {
+        stage('Build docker ps') {
+            agent { dockerfile true }
             steps {
-                sh 'docker run -i -t -name centos7_test /bin/bash'
-            }
-        }
-
-        stage('Version Check') {
-            steps {
-                sh 'cat /etc/*-release'
+                sh 'docker build -tag gradleT1 ./'
+                sh 'docker run -it -d gradleT1'
             }
         }
     }
@@ -31,7 +31,4 @@ pipeline {
             //mail to: team@gmail.com, subject: 'Pipeline fail email'
         }
     }
-}
-pipeline {
-    /* insert Declarative Pipeline here */
 }
