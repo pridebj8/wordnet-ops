@@ -16,8 +16,8 @@ pipeline {
         stage('Build docker ps') {
             agent any
             steps {
-                sh 'docker build -t wordnet-ops-01 ./'
-                sh 'docker run -p 49000:49000 -d  wordnet-ops-01'
+                sh 'docker build -t wordnet01 .'
+                sh 'docker run -p 49000:49000 -d wordnet01'
             }
         }
     }
